@@ -34,17 +34,29 @@ clear;
 
 time = tic;
 
-% Parameters
-mg = 1;               % Number of micrographs to generate
-pp = 1;                 % Phase plate (0 = no; 1 = yes)
-df_range= [300 800];    % Defocus range [nm]
-mb_series = [0.5];      % Motion blur series (If multiple MB, enter them as a vector)
-cf_series = [14];       % Correction factor  (If multiple CF, enter them as a vector)
-dose      = [50];       % Electron dose to the specimen [e-/A2]
-pix = 512;             % Number of pixels 
-pixsize = 0.5;          % Pixel size [A]
-mindist = 50/pixsize;   % Minimum distance between particles divided by pixsize, 
+% Default Parameters
+mg = 1;                     % Number of micrographs to generate
+pp = 1;                     % Phase plate (0 = no; 1 = yes)
+df_range= [300 800];        % Defocus range [nm]
+mb_series = [0.5];          % Motion blur series (If multiple MB, enter them as a vector)
+cf_series = [14];           % Correction factor  (If multiple CF, enter them as a vector)
+dose      = [50];           % Electron dose to the specimen [e-/A2]
+pix = 512;                  % Number of pixels 
+pixsize = 0.5;              % Pixel size [A]
+mindist = 50/pixsize;       % Minimum distance between particles divided by pixsize, 
                             % Depends on type of protein (apo ferrtin ~150)
+dir1 =  './Micrographs'; % Select folder where to save micrographs
+% NT2C Parameters
+mg          = 1;                % Number of micrographs to generate
+pp          = 1;                % (Default)Phase plate (0 = no; 1 = yes)
+df_range    = [2500 3200];      % Defocus range [nm]
+mb_series   = [0.5];            % (Default)Motion blur series (If multiple MB, enter them as a vector)
+cf_series   = [14];             % (Default)Correction factor  (If multiple CF, enter them as a vector)
+dose        = [20];             % Electron dose to the specimen [e-/A2]
+pix         = 4096;             % Number of pixels 
+pixsize     = 1.34;             % Pixel size [A]
+mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
+                                % Depends on type of protein (apo ferrtin ~150)
 dir1 =  './Micrographs'; % Select folder where to save micrographs
 
 
@@ -104,18 +116,19 @@ for micro = 1:mg
                     out = TEMsim(defocus,mb_series(mb),cf_series(cf),1,rpdb,particles,dose(d),circles,pix,pixsize,pp,mindist);
                     ImageOut = out.series;
                     ImageNoiseless = out.noiseless_series;
-                    delete ./Raw/Particles/*.raw;  % delete particle positions for the generated micrographs (for memory)
+                    delete ./Raw/Particles/*.raw; % delete particle positions for the generated micrographs (for memory) */
                     
                     
                     % Write micrograph to .MRC file
-                    s1 = "MicrographNr"+ (micro) +"_size"+pix+"x"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+".mrc";
-                    s2 = "MicrographNr"+ (micro) +"_size"+pix+"x"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_noiseless.mrc";
+                    format_time = 'yy_mm_dd_HH_MM_SS'
+                    % s1 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+".mrc";
+                    % s2 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
+                    s1 = "MicrographNr"+ (micro) +"_partnr"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
+                    s2 = "MicrographNr"+ (micro) +"_partnr"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
                     WriteMRC(double(ImageOut),0.50,[dir1 filesep char(s1)]);
                     WriteMRC(double(ImageNoiseless),0.50,[dir1 filesep char(s2)]);
                     disp(' ')
                     disp('Successful Micrograph')
-                    
-
                     
                 catch ex
                       
@@ -133,7 +146,6 @@ for micro = 1:mg
     end
 end
 
-  
 disp(' ')
 disp(...
    [char("###################### End of Simulation ######################") newline newline...

@@ -25,7 +25,7 @@ params.spec.mapsample    = '2WRJ_VoxSize1.0A.mrc';  % if input is a map the name
 params.spec.potcontribution = 'iasa';               % Potential type. Options: 'iasa' or 'iasa+pb'(note: for 'iasa+pb' you first need to calcualate the pb potential via apbs. See the manual)
 params.spec.motblur         = mb;                   % Motion blur in [A]
 params.spec.thick           = 10e-09;               % Thickness of the specimen[m]. 
-params.spec.imagpot         = 0;                    % Amplitude contrast flag. Options: (=0, none) (=1 constant Q) (=2 ice "plasmons") (=3 'plasmons" of ice and protein)         
+params.spec.imagpot         = 0;                    % Amplitude contrast flag. Options: (=0, none) (=1 constant Q) (=2 ice "plasmons") (=3 'plasmons' of ice and protein)         
 
 
 % ---------------------- Electron-specimen interaction (inter field)
