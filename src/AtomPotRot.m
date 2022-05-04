@@ -129,7 +129,7 @@ end
 
 outpot=[];
 for ss = 1:numpartExtra  
-    kkkk = tic;
+    % kkkk = tic;
     RAl    = [cos(alpha(ss)) sin(alpha(ss)); -sin(alpha(ss)) cos(alpha(ss))];
     RBet   = [cos(beta(ss)) sin(beta(ss)); -sin(beta(ss)) cos(beta(ss))];
     RGamma = [cos(gamma(ss)) sin(gamma(ss)); -sin(gamma(ss)) cos(gamma(ss))];
@@ -201,23 +201,23 @@ for ss = 1:numpartExtra
     atompot1 = atompot - Vwat;
     atompot1(atompot1<0) = 0; 
     %it is neccesary to apply low-pass filter before eventual downsampling
-    disp(' ')
-    disp('Resampling...')
-    tic
+    %disp(' ')
+    %disp('Resampling...')
+    %tic
     if voxel_size < pixsz
         atompot1  = gaussf(mat2im(atompot1), sqrt((pixsz/voxel_size)^2-1), 'best');
     end
     atPotBlRspm = double(resample(atompot1, voxel_size/pixsz)); 
-    toc
+    %toc
     
-    disp(' ')
-    disp('Adding Motion Blur...')
-    tic
+    %disp(' ')
+    %disp('Adding Motion Blur...')
+    %tic
     % motion factor
     if params2.spec.motblur~=0
         atPotBlRspm = double(motionBlur(atPotBlRspm,params2));
     end
-    toc
+    %toc
     
     %imaginary part
     if  params2.spec.imagpot == 3
@@ -265,7 +265,7 @@ for ss = 1:numpartExtra
         %disp(bla)
         fclose(fid);
     end
-    disp('Total time for calculating potential')
-    toc(kkkk)
+    % disp('Total time for calculating potential')
+    % toc(kkkk)
     disp('-----------------------------------------------------------------')
 end

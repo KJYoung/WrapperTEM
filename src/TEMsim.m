@@ -17,21 +17,18 @@ params.proc.geom            = 0;            % Specify orientation and translatio
 params.proc.cores           = 10;           % the numer of matlab pools to be open for parfor loops 
 params.proc.rawdir          = './Raw';
 
-
 % ----------------------- Specimen (spec field)
 params.spec.source          = 'pdb';                % Options: 'map', 'pdb', or 'amorph'      
-params.spec.pdbin        = '1dpx' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
+params.spec.pdbin        = '2wrj' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
 params.spec.mapsample    = '2WRJ_VoxSize1.0A.mrc';  % if input is a map the name should contain the info about voxel size with following convention '_VoxSize'%02.2f'
 params.spec.potcontribution = 'iasa';               % Potential type. Options: 'iasa' or 'iasa+pb'(note: for 'iasa+pb' you first need to calcualate the pb potential via apbs. See the manual)
 params.spec.motblur         = mb;                   % Motion blur in [A]
 params.spec.thick           = 10e-09;               % Thickness of the specimen[m]. 
 params.spec.imagpot         = 0;                    % Amplitude contrast flag. Options: (=0, none) (=1 constant Q) (=2 ice "plasmons") (=3 'plasmons' of ice and protein)         
 
-
 % ---------------------- Electron-specimen interaction (inter field)
 params.inter.type           = 'ms';       % Options: 'pa' (projection), 'wpoa' (weak-phase), 'pa+wpoa', 'tpga'(thick-phase grating), 'ms'(multislice) 
     params.inter.msdz       = 2e-9;         % Approximate thickness of the slice for multislice [m] Required if params.inter.type = 'ms'
-
        
 % ---------------------- Microscope (mic field)
 params.mic.Cs          = 2.7e-3;            % Spherical aberration  [m]
@@ -100,14 +97,14 @@ end
 
 
 % ---------------------- Display
-switch params.disp.generateWhat
-    case 'im'
-           dipshow(imStructOut.series, 'lin')
-    case 'exitw'
-           dipshow(imStructOut.exit, 'lin')
-    case 'imNoiseless'
-           dipshow(imStructOut.noiseless_series, 'lin')           
-end
+% switch params.disp.generateWhat
+%     case 'im'
+%            dipshow(imStructOut.series, 'lin')
+%     case 'exitw'
+%            dipshow(imStructOut.exit, 'lin')
+%     case 'imNoiseless'
+%            dipshow(imStructOut.noiseless_series, 'lin')           
+% end
 
 % ---------------------- Display noiseless
 % for i = 1:size(imStructOut.noiseless_series,3)
@@ -124,7 +121,4 @@ end
 % 
 % end
 % colormap gray
-
-
-
 end

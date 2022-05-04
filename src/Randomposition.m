@@ -17,7 +17,7 @@ function [circData, circHandles] = Randomposition(N, mindist)
 %       [g, radius] = findgroups(circData(:,3));
 %       count = splitapply(@length, circData(:,3), g);
 %       table(radius, count)
-% Details (other than what's explained in the parameter section)
+% Details (other than what's explained in the parameter section)'
 %   * For each circle size (defined by user), the number of circles that are
 %       attempted is a proportion between the circle's area and the frame's area.
 %       For 'n' circle sizes, the total area of the frame is evenly split into 'n'
