@@ -57,7 +57,8 @@ params.acquis.tilt           = 0/180*pi;      % Tilt geometry
 params.acquis.dose_on_sample = [dose]/length(params.acquis.tilt); % Integrated flux (for the full tilt series) [e-/A2]
 
 % ----------------------- Detector-Camera (cam field)
-params.cam.type              = 'FalconIII_EC'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
+% params.cam.type              = 'FalconIII_EC'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
+params.cam.type              = 'FalconIII_Linear'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
 params.cam.bin               = 1; % hardware binning
 % if params.cam.type = 'custom' please characterize your camera (provide MTF and DQE files and if needed readnoise and dark current).
 % The characterization can be done via e.g. the tools and methods described in Vulovic et al. 2010 Acta Crist. D 
@@ -71,11 +72,8 @@ params.disp.generateWhat   = 'im'; % Options: 'im', 'exitw', 'imNoiseless'
 params.disp.ctf            = 0; % Flag to display CTF
 params.disp.mtfdqe         = 0; % Flag to display MTF and DQE
 
-
-
 % ---------------------- Parse parameters
 params2 = parsePar(params,cf);
-
 
 % ---------------------- Generate and/or load 3D potential of a particle
 
