@@ -20,7 +20,7 @@ params.proc.rawdir          = './Raw';
 % ----------------------- Specimen (spec field)
 params.spec.source          = 'pdb';                % Options: 'map', 'pdb', or 'amorph'      
 params.spec.pdbin        = '2wrj' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
-params.spec.mapsample    = '2WRJ_VoxSize1.0A.mrc';  % if input is a map the name should contain the info about voxel size with following convention '_VoxSize'%02.2f'
+params.spec.mapsample    = '2WRJ_VoxSize1.34A.mrc';  % if input is a map the name should contain the info about voxel size with following convention '_VoxSize'%02.2f'
 params.spec.potcontribution = 'iasa';               % Potential type. Options: 'iasa' or 'iasa+pb'(note: for 'iasa+pb' you first need to calcualate the pb potential via apbs. See the manual)
 params.spec.motblur         = mb;                   % Motion blur in [A]
 params.spec.thick           = 10e-09;               % Thickness of the specimen[m]. 
