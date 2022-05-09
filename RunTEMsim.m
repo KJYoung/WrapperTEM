@@ -27,6 +27,9 @@
 %                                                                         %
 %                                                                         %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %  
+addpath('/dip/common/dipimage')
+addpath('./src')
+dip_initialise
 
 clc;
 close all;
