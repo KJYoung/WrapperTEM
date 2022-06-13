@@ -12,7 +12,8 @@
 function [imStructOut] = TEMsim(df,mb,cf,saved,rpdb,p,dose,circl,pix,pixsize,pp,mindist)
 % ----------------------- General processing parameters (proc field)
 params.proc.N               = pix;      % Image size (field of view)
-params.proc.partNum         = p;            % Number of particles. 
+% params.proc.partNum         = p;            % Number of particles. 
+params.proc.partNum         = 120;            % Number of particles. 
 params.proc.geom            = 0;            % Specify orientation and translation of particles in 'PartList.m' (=1) or generate them randomly (=0) 
 params.proc.cores           = 10;           % the numer of matlab pools to be open for parfor loops 
 params.proc.rawdir          = './Raw';
@@ -40,7 +41,8 @@ params.mic.diam_obj          = 100e-6;      % Diameter of objective aperture [m]
 params.mic.foc               = 4.7e-3;      % Focal distance [m]
 % ----------------------- ideal phase plate (optional)
 params.mic.PPflag             = pp;         % Phase plate flag 
-    params.mic.PP_Phase       = pi/2;       % Phase plate phase shift [rad] *pi
+    % params.mic.PP_Phase       = pi/2;       % Phase plate phase shift [rad] *pi
+    params.mic.PP_Phase       = pi/6;       % Phase plate phase shift [rad] *pi
     params.mic.PP_qcuton      = 1/128*1e10; % Cut-on frequency [1/m]. Typical values: 1/25, 1/75, 1/125, 1/250, 1/250
 
 params.mic.SPPflag            = 0 ;         % Spiral Phase Plate Flag
@@ -58,7 +60,7 @@ params.acquis.dose_on_sample = [dose]/length(params.acquis.tilt); % Integrated f
 
 % ----------------------- Detector-Camera (cam field)
 % params.cam.type              = 'FalconIII_EC'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
-params.cam.type              = 'FalconIII_Linear'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
+params.cam.type              = 'FalconI'; % Options: 'custom', 'Eagle4k', 'US4000', 'US1000GIF', 'FalconI', 'FalconIII_Linear','FalconIII_EC', 'perfect' (64% at Nq -counting mode), 'ideal' (100% at Nq)
 params.cam.bin               = 1; % hardware binning
 % if params.cam.type = 'custom' please characterize your camera (provide MTF and DQE files and if needed readnoise and dark current).
 % The characterization can be done via e.g. the tools and methods described in Vulovic et al. 2010 Acta Crist. D 

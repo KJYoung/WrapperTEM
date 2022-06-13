@@ -50,18 +50,19 @@ time = tic;
                              % Depends on type of protein (apo ferrtin ~150)
 % dir1 =  './Micrographs'; % Select folder where to save micrographs
 % NT2C Parameters
-mg          = 50;                % Number of micrographs to generate
+mg          = 250;                % Number of micrographs to generate
 pp          = 0;                % (Default)Phase plate (0 = no; 1 = yes)
-df_range    = [2500 3200];      % Defocus range [nm]
-mb_series   = 0;            % (Default)Motion blur series (If multiple MB, enter them as a vector)
-cf_series   = 0;             % (Default)Correction factor  (If multiple CF, enter them as a vector)
+% df_range    = [2500 3200];      % Defocus range [nm]
+df_range    = [2800 3800];      % Defocus range [nm]
+mb_series   = [0];            % (Default)Motion blur series (If multiple MB, enter them as a vector)
+cf_series   = [0];             % (Default)Correction factor  (If multiple CF, enter them as a vector)
 dose        = [20];             % Electron dose to the specimen [e-/A2]
 pix         = 4096;             % Number of pixels 
 pixsize     = 1.34;             % Pixel size [A]
-mindist     = 225/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
+mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
                                 % Depends on type of protein (apo ferrtin ~150)
-dir_noise     =  './Micrographs/partA2'; % Select folder where to save micrographs
-dir_noiseless =  './Micrographs/partB2'; % Select folder where to save micrographs
+dir_noise     =  './Micrographs/noisy4'; % Select folder where to save micrographs
+dir_noiseless =  './Micrographs/clean4'; % Select folder where to save micrographs
 
 
 tot = mg*length(mb_series)*length(cf_series)*length(dose);
@@ -121,16 +122,17 @@ for micro = 1:mg
                     delete ./Raw/Particles/*.raw; % delete particle positions for the generated micrographs (for memory) */
                     
                     % Write micrograph to .MRC file
-                    format_time = 'mm_dd_HH_MM';
+                    format_time = 'mm_dd_HH';
                     % s1 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+".mrc";
                     % s2 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
                     % s1 = "EM_F3EC"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
                     % s2 = "EM_F3EC"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
-                    s1 = "FIN"+ (micro) +"_particle"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
-                    s2 = "SIZEDIFF0F3EC"+ (micro) +"_particle"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
+                    s1 = "D4_1_"+ (micro) +"_p"+particles+"_df"+round(defocus)+"-"+datestr(now, format_time)+".mrc";
+                    %s1 = "D4"+ (micro) +"_p"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
+                    % s2 = "SIZEDIFF0F3EC"+ (micro) +"_particle"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
                     % s3 = "EM2"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+"_exit.mrc";
-                    WriteMRC(double(ImageOut),      1.34,[dir_noise filesep char(s1)]);
-                    WriteMRC(double(ImageNoiseless),1.34,[dir_noiseless filesep char(s1)]);
+                    WriteMRC(double(ImageOut),      0.5,[dir_noise filesep char(s1)]);
+                    WriteMRC(double(ImageNoiseless),0.5,[dir_noiseless filesep char(s1)]);
                     % WriteMRC(double(ImageNoiseless),13.4,[dir_noiseless filesep char(s2)]);
                     % WriteMRC(double(Exit),0.50,[dir1 filesep char(s3)]);
                     disp(' ')
