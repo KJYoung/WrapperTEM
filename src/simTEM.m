@@ -23,7 +23,6 @@ function imStructOut= simTEM(InputVol, params2)
     %
     %  Milos Vulovic
     %
-    %
     voxSz = params2.acquis.pixsize;% the voxel size
     % prealocate memory for the stack (series)
     nTiltAngles = length(params2.acquis.tilt);

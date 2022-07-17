@@ -61,8 +61,7 @@ pix         = 4096;             % Number of pixels
 pixsize     = 1.34;             % Pixel size [A]
 mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
                                 % Depends on type of protein (apo ferrtin ~150)
-dir_noise     =  './Micrographs/noisy5lzf'; % Select folder where to save micrographs
-dir_noiseless =  './Micrographs/clean5lzf'; % Select folder where to save micrographs
+dir_noiseless =  './Micrographs/testClean5lzf'; % Select folder where to save micrographs
 
 
 tot = mg*length(mb_series)*length(cf_series)*length(dose);
@@ -117,25 +116,13 @@ for micro = 1:mg
 
                     % Run simulation to generate micrograph
                     out = TEMsim(defocus,mb_series(mb),cf_series(cf),1,rpdb,particles,dose(d),circles,pix,pixsize,pp,mindist);
-                    ImageOut = out.series;
                     ImageNoiseless = out.noiseless_series;
-                    % Exit = out.exit;
                     delete ./Raw/Particles/*.raw; % delete particle positions for the generated micrographs (for memory) */
                     
                     % Write micrograph to .MRC file
                     format_time = 'mm_dd_HH';
-                    % s1 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+".mrc";
-                    % s2 = "MicrographNr"+ (micro) +"_size"+pix+"_pixsize"+pixsize*100+"_partnr"+particles+"_dose"+dose(d)+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
-                    % s1 = "EM_F3EC"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
-                    % s2 = "EM_F3EC"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+"_noiseless.mrc";
                     s1 = "D4_1_"+ (micro) +"_p"+particles+"_df"+round(defocus)+"-"+datestr(now, format_time)+".mrc";
-                    %s1 = "D4"+ (micro) +"_p"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
-                    % s2 = "SIZEDIFF0F3EC"+ (micro) +"_particle"+particles+"_df"+round(defocus)+"_minDist"+mindist+"_Date"+datestr(now, format_time)+".mrc";
-                    % s3 = "EM2"+ (micro) +"_particle"+particles+"_cf"+cf_series(cf)+"_mb"+mb_series(cf)+"_df"+round(defocus)+"_PP"+pp+"_minDist"+mindist+"_Date"+datestr(now, format_time)+"_exit.mrc";
-                    WriteMRC(double(ImageOut),      0.5,[dir_noise filesep char(s1)]);
                     WriteMRC(double(ImageNoiseless),0.5,[dir_noiseless filesep char(s1)]);
-                    % WriteMRC(double(ImageNoiseless),13.4,[dir_noiseless filesep char(s2)]);
-                    % WriteMRC(double(Exit),0.50,[dir1 filesep char(s3)]);
                     disp(' ')
                     disp('Successful Micrograph')
                     
