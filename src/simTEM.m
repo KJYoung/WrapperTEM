@@ -119,8 +119,6 @@ case 'ms'
         
         clear potenext
         
-        
-        
         %Fourier domain
         xwm = (voxSz)*Nm;%pixelsize for multislice * size sample
         q_true_pix_m = 1/xwm;
@@ -180,7 +178,6 @@ case 'ms'
         toc
         disp(' ')
 
-        
         if strcmp(params2.spec.source, 'amorph')
             thicknessfull = params2.spec.thick/cos(tiltang);
             psi_exit(:,:,ll-1) = psi_exit(:,:,ll-1)*exp(-params2.inter.sig_transfer*params2.spec.potenampl*thicknessfull);
@@ -224,22 +221,8 @@ noiseless_tilt_series = dip_image(btot_i);
 
 %%  --------------------------------- Camera influence          
 noiseless_tilt_series=double(noiseless_tilt_series);
-series = double(series);
-for iii= 1:Nseries
-    if strcmp(params2.seriesout,'dose')
-        params2.influx=params2.acquis.dose(iii);
-    else
-        params2.influx=params2.acquis.dose(1);
-    end
-    if ~mod(iii,5)||~mod(iii,Nseries)
-        fprintf(['Calculate the DQE for the ' params2.seriesout sprintf(' series. Image number %3d of %3d\n', iii, Nseries)]);
-    end
-IntenDetect = DetectSim(squeeze(dip_image(noiseless_tilt_series(:,:,iii))), params2); 
-series(:,:,iii) = double(IntenDetect);
-end
-series = dip_image(series);
 
- %% ---------------------------------Output structure
+%% ---------------------------------Output structure
 imStructOut.series           = series;
 imStructOut.noiseless_series = noiseless_tilt_series;
 imStructOut.exit             = extprojstack;
