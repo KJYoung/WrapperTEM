@@ -20,8 +20,10 @@ params.proc.rawdir          = './Raw';
 
 % ----------------------- Specimen (spec field)
 params.spec.source          = 'pdb';                % Options: 'map', 'pdb', or 'amorph'      
-params.spec.pdbin        = '2wrj' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
-params.spec.mapsample    = '2WRJ_VoxSize1.34A.mrc';  % if input is a map the name should contain the info about voxel size with following convention '_VoxSize'%02.2f'
+% params.spec.pdbin        = '2wrj' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
+% params.spec.pdbin        = '1s3x' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
+params.spec.pdbin        = '5lzf' ;               % Required if params.spec.source = 'map' or 'pdb' ( 2GTL, 2WRJ, 1SA0, 1RYP or any other pdb entree)
+params.spec.mapsample    = '5LZF_VoxSize1.34A.mrc';  % if input is a map the name should contain the info about voxel size with following convention '_VoxSize'%02.2f'
 params.spec.potcontribution = 'iasa';               % Potential type. Options: 'iasa' or 'iasa+pb'(note: for 'iasa+pb' you first need to calcualate the pb potential via apbs. See the manual)
 params.spec.motblur         = mb;                   % Motion blur in [A]
 params.spec.thick           = 10e-09;               % Thickness of the specimen[m]. 
@@ -95,30 +97,4 @@ end
 % ---------------------- Image Formation
 [imStructOut] = simTEM(InputVol, params2);
 
-
-% ---------------------- Display
-% switch params.disp.generateWhat
-%     case 'im'
-%            dipshow(imStructOut.series, 'lin')
-%     case 'exitw'
-%            dipshow(imStructOut.exit, 'lin')
-%     case 'imNoiseless'
-%            dipshow(imStructOut.noiseless_series, 'lin')           
-% end
-
-% ---------------------- Display noiseless
-% for i = 1:size(imStructOut.noiseless_series,3)
-%     
-%     
-%     if size(imStructOut.noiseless_series,3) > 1
-%         subplot(3,3,i)
-%     else
-%         %figure
-%     end
-% %     imagesc(imStructOut.noiseless_series(:,:,i))
-% 
-%     dipshow(imStructOut.noiseless_series, 'lin')  
-% 
-% end
-% colormap gray
 end

@@ -61,8 +61,8 @@ pix         = 4096;             % Number of pixels
 pixsize     = 1.34;             % Pixel size [A]
 mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
                                 % Depends on type of protein (apo ferrtin ~150)
-dir_noise     =  './Micrographs/noisy4'; % Select folder where to save micrographs
-dir_noiseless =  './Micrographs/clean4'; % Select folder where to save micrographs
+dir_noise     =  './Micrographs/noisy5lzf'; % Select folder where to save micrographs
+dir_noiseless =  './Micrographs/clean5lzf'; % Select folder where to save micrographs
 
 
 tot = mg*length(mb_series)*length(cf_series)*length(dose);
@@ -84,7 +84,8 @@ disp(...
 % Read PDB File
 tic
  disp([newline 'Loading PDB file...'])
- rpdb = pdbread('./PDBs/2wrj.pdb'); % Select PDB file to read
+ % rpdb = pdbread('./PDBs/2wrj.pdb'); % Select PDB file to read
+ rpdb = pdbread('./PDBs/5lzf.pdb'); % Select PDB file to read
 toc
 disp(' ')               
                 

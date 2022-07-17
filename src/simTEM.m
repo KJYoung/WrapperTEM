@@ -192,7 +192,6 @@ case 'ms'
         %%extproj   = extend_exit(squeeze(proj_pot),params2);
         extprojstack(:,:,ll-1) = squeeze(psi_exit(:,:,ll-1));
         
-        
     end
 end
 if strcmp(params2.seriesout,'defocus') || strcmp(params2.seriesout,'dose')
@@ -218,31 +217,11 @@ for jjj= 1:Nseries
         ctf_out(:,:,jjj)=double(ctf);
   end
   
-% For dark field image  
-%   central_block = ones(params2.proc.N, params2.proc.N);
-%   central_block(((params2.proc.N/2-31):(params2.proc.N/2+32)), ((params2.proc.N/2-31):(params2.proc.N/2+32))) = 0.1 ;  % block the central direct beam 
-%   central_block((params2.proc.N/2+1), (params2.proc.N/2+1)) = 0.025 ;
-%   
-%   Image_spp=dip_image(ones(params2.proc.N,params2.proc.N),'complex');
-%         x_ic = xx(Image_com);         
-%         y_ic = yy(Image_com);
-%         phi_ic = atan2(y_ic,x_ic);   
-%         SPhPlate = exp(1i*params2.mic.PP_Phase*phi_ic).*Image_com; % For spiral phase plate
-%         SPhPlate = exp(1i*params2.mic.PP_Phase)*Image_spp;
-%         SPhPlateIm = gaussf(imag(SPhPlate),1);
-%         SPhPlateRe = gaussf(real(SPhPlate),1);
-%         SPhPlate = SPhPlateRe+1i*SPhPlateIm;
-  
-% btot = central_block*SPhPlate*dip_fouriertransform(dip_image(psi_exit(:,:,jjj)),'forward',[1 1 ]); %0]);  % for dark field image, no CTF
-  
-  
   btot = ctf*dip_fouriertransform(dip_image(psi_exit(:,:,jjj)),'forward',[1 1 ]); %0]);
   btot_i(:,:,jjj) = double(abs(dip_fouriertransform(btot,'inverse',[1 1])).^2); % intensity in the image without camera influence              
 end
 noiseless_tilt_series = dip_image(btot_i); 
 
-
-            
 %%  --------------------------------- Camera influence          
 noiseless_tilt_series=double(noiseless_tilt_series);
 series = double(series);
