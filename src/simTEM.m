@@ -131,12 +131,10 @@ function imStructOut= simTEM(InputVol, params2)
     
             % Phase grating & Multislice at  same time
             disp('-.-.-.-.-.-.-.-.- STARTING MULTISLICE -.-.-.-.-.-.-.-.-...')
-            disp(' ')
             tic
             for ii = 0:n-1
                 vai = tic;
                     disp('Loading potential...')
-                    
                     
                     disp(['SLICE ' char(num2str(ii+1)) '/' char(num2str(n))])
                     disp(' ')
@@ -181,11 +179,7 @@ function imStructOut= simTEM(InputVol, params2)
                 thicknessfull = params2.spec.thick/cos(tiltang);
                 psi_exit(:,:,ll-1) = psi_exit(:,:,ll-1)*exp(-params2.inter.sig_transfer*params2.spec.potenampl*thicknessfull);
             end
-            
-            %projpot_r = resample(squeeze(real(psi_exit(:,:,ll-1))),[(voxSz*1e-10/params2.acquis.pixsize) (voxSz*1e-10/params2.acquis.pixsize)]);
-            %projpot_i = resample(squeeze(imag(psi_exit(:,:,ll-1))),[(voxSz*1e-10/params2.acquis.pixsize) (voxSz*1e-10/params2.acquis.pixsize)]);
-            %proj_pot  = projpot_r+1i*projpot_i; % projected potential
-            %%extproj   = extend_exit(squeeze(proj_pot),params2);
+
             extprojstack(:,:,ll-1) = squeeze(psi_exit(:,:,ll-1));
             
         end

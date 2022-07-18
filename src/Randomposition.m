@@ -66,15 +66,6 @@ density = 1;
 % When true, circles may overlap.
 allowOverlap = false;
 
-%% Add soap
-% Create figure
-% figure();
-% axes();
-% hold on
-% axis equal %set aspect ratio to 1:1
-% xlim(fs(1)/2 * [-1.05, 1.05]) %with some extra space
-% ylim(fs(2)/2 * [-1.05, 1.05]) %with some extra space
-
 % shrink frame so max cirlce is always inside
 switch edgeType
     case 0  % Cirlce edges can expand outside of the frame
@@ -155,23 +146,3 @@ for i = 1:nSizes
 %     end
     
 end
-% % Remove waitbar
-% if ishghandle(wb)
-%     delete(wb)
-% end
-% 
-% % Draw frame
-% rectangle('position', [-fs/2, fs], 'LineWidth', 2)
-% circHandles = [h{:}]';
-
-% function h = drawcircles(xyr, clearBorder, fs)
-% % Draw circle given center and radius
-% ang=0:0.01:2*pi;
-% xp=xyr(:,3)*cos(ang) + repmat(xyr(:,1),1,numel(ang)); %changed 190901 to work with r2016a
-% yp=xyr(:,3)*sin(ang) + repmat(xyr(:,2),1,numel(ang)); %changed 190901 to work with r2016a
-% if clearBorder
-%     % remove data outside of frame, if requested
-%     xp(abs(xp) > fs(1)/2) = NaN;
-%     yp(abs(yp) > fs(2)/2) = NaN;
-% end
-% h = plot(xp', yp', 'k')';

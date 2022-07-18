@@ -52,7 +52,6 @@ time = tic;
 % NT2C Parameters
 mg          = 250;                % Number of micrographs to generate
 pp          = 0;                % (Default)Phase plate (0 = no; 1 = yes)
-% df_range    = [2500 3200];      % Defocus range [nm]
 df_range    = [2800 3800];      % Defocus range [nm]
 mb_series   = [0];            % (Default)Motion blur series (If multiple MB, enter them as a vector)
 cf_series   = [0];             % (Default)Correction factor  (If multiple CF, enter them as a vector)
@@ -61,8 +60,7 @@ pix         = 4096;             % Number of pixels
 pixsize     = 1.34;             % Pixel size [A]
 mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
                                 % Depends on type of protein (apo ferrtin ~150)
-dir_noiseless =  './Micrographs/testClean5lzf'; % Select folder where to save micrographs
-
+dir_noiseless =  './Micrographs/test2'; % Select folder where to save micrographs
 
 tot = mg*length(mb_series)*length(cf_series)*length(dose);
 count  = 0;

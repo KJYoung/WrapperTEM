@@ -26,7 +26,7 @@ pout = params2;
 dir0 = params2.proc.rawdir;
 
 if strcmp(params2.spec.source, 'pdb')   % generate the potential maps from pdb
-    % first check if the particles are already generated
+    % first check if the particles are already generated %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     if params2.spec.imagpot~=3
         list = dir([dir0 filesep 'Particles' filesep params2.spec.pdbin '*MF' sprintf('%3.1f',params2.spec.motblur) '_VoxSize' sprintf('%02.2f',params2.acquis.pixsize*1e10) '*A.raw']);
