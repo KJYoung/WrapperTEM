@@ -152,10 +152,6 @@ if params2.disp.ctf
     end
 end
 
-
-
-
-
 %     Original code ctf plot: radialmean           
 
 ctf1d = radialmean(imag(ctf));

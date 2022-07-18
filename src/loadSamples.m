@@ -54,47 +54,7 @@ if strcmp(params2.spec.source, 'pdb')   % generate the potential maps from pdb
       [atompotF, numpart] = AtomPotRot(params2, alphad, betad, gammad, wr,rpdbsave,saved);
       pout.proc.partNum = numpart + params2.NumGenPart;
       PartPot = atompotF;
-   end
-    
-elseif strcmp(params2.spec.source, 'amorph') % the specimen is amorphous
-    projected = dip_image(randn(params2.proc.N,params2.proc.N));
-    DMft      = ft(projected);
-    if strcmp(params2.spec.imagpot2specm, 'amorIce')
-        d0 = 1.54;% Ang
-    elseif strcmp(params2.spec.imagpot2specm, 'amorC')
-        d0 = 2.88; % Ang
-    end
-    dmin = 2*d0/(params2.acquis.pixsize/1e-10);
-    Btot = 2*pi^2*(dmin)^2; 
-    PartPot = real(ift(DMft*exp(-Btot*(rr(DMft,'freq')/params2.acquis.pixsize*1e-10).^2)));
-    
-elseif strcmp(params2.spec.source, 'map')  % load already existing maps from folder 'pot'    
-    Potdir = [dir0 filesep 'MAPs'];
-    if ~exist(Potdir, 'dir')
-        error('Could not find a suitable folder for potential files. Make a subfolder pot in the working directory or specify the directory in loadSamples.m'); %change from error to message 
-    end
-    
-    if exist([Potdir filesep params2.spec.mapsample]) 
-         % load already existing map
-         atompot = tom_mrcread([Potdir filesep params2.spec.mapsample]);
-         atompot = dip_image(atompot.Value);
-         solvpot = mean(atompot(end-2:end,:,end-2:end)); % mean value of the solvent
-         atompot = atompot-solvpot;
-         [tokens matchstring] = regexp(params2.spec.mapsample,'_VoxSize(\d+\.?\d*)A','tokens','match');
-         pout.spec.voxsize = str2num(tokens{1}{1});
-         % it is neccesary to apply low-pass filter before eventual downsampling
-        if pout.spec.voxsize*1e-10 <= params2.acquis.pixsize
-           atompotBl  = gaussf(mat2im(atompot), sqrt((params2.acquis.pixsize/(pout.spec.voxsize*1e-10))^2-1), 'best');
-        else
-           warning('The voxel size of the available potential is larger than the pixel size')
-        end
-         PartPot = resample(atompotBl, pout.spec.voxsize*1e-10/params2.acquis.pixsize); 
-         if params2.spec.motblur~=0
-            PartPot = motionBlur(PartPot,params2);
-         end
-    else 
-         error('The map or its path is not available')
-    end     
+   end    
 else
     error('This type of the input type is not known. Options are ''pdb'' ''map'' or '' amorphous''')
 end  

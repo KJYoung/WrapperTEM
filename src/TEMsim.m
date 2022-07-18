@@ -31,7 +31,8 @@ params.spec.imagpot         = 0;                    % Amplitude contrast flag. O
 
 % ---------------------- Electron-specimen interaction (inter field)
 params.inter.type           = 'ms';       % Options: 'pa' (projection), 'wpoa' (weak-phase), 'pa+wpoa', 'tpga'(thick-phase grating), 'ms'(multislice) 
-    params.inter.msdz       = 2e-9;         % Approximate thickness of the slice for multislice [m] Required if params.inter.type = 'ms'
+    % params.inter.msdz       = 2e-9;       % Approximate thickness of the slice for multislice [m] Required if params.inter.type = 'ms'
+    params.inter.msdz       = 2e-8;         % Approximate thickness of the slice for multislice [m] Required if params.inter.type = 'ms'
        
 % ---------------------- Microscope (mic field)
 params.mic.Cs          = 2.7e-3;            % Spherical aberration  [m]

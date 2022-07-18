@@ -96,7 +96,7 @@ if strcmp(params2.spec.source, 'pdb')
             outputfilename = sprintf('%s_a%04d_Nx%i_Ny%i_Nz%i_Alp%3.1f_Bet%3.1f_Gam%3.1f_MF%3.1f_VoxSize%02.2fA_Volt%03dkV.raw',params2.spec.pdbin,tt, nx, ny, nz, Alp, Bet, Gam, MF,VoxS, params2.acquis.Voltage/1000);
         end
         OutFileName = [dir0 filesep 'Particles' filesep outputfilename];
-        disp(OutFileName);
+        % disp(OutFileName);
         fid = fopen(OutFileName, 'r');
         if params2.spec.imagpot~=3
             atompot = fread(fid,nx*ny*nz,'*double');

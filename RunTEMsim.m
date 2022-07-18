@@ -60,7 +60,7 @@ pix         = 4096;             % Number of pixels
 pixsize     = 1.34;             % Pixel size [A]
 mindist     = 150/pixsize;       % (Default = 50)Minimum distance between particles divided by pixsize, 
                                 % Depends on type of protein (apo ferrtin ~150)
-dir_noiseless =  './Micrographs/test2'; % Select folder where to save micrographs
+dir_noiseless =  './Micrographs/test3'; % Select folder where to save micrographs
 
 tot = mg*length(mb_series)*length(cf_series)*length(dose);
 count  = 0;

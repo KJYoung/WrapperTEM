@@ -224,6 +224,5 @@ for ss = 2:numpartExtra
         fid = fopen(OutFileName,'w');
         bla = fwrite(fid,double(atPotBlRspm), 'double');
         fclose(fid);
-        fprintf('And, particle %3d\n',length(eltype),ss )
     end
 end
